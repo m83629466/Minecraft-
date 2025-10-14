@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar no Servidor Minecraft / Craftsman</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin: 10px;
+    }
+    button:hover {
+      background: #2ecc71;
+    }
+    .info {
+      background: rgba(255,255,255,0.1);
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Entrar no Servidor Speedfire1237</h1>
+  <p>Clique abaixo para abrir no Minecraft ou baixar o Craftsman.</p>
+
+  <button id="openMinecraft">Abrir no Minecraft</button>
+  <button id="openCraftsman">Abrir na Play Store (Craftsman)</button>
+
+  <div class="info" style="margin-top:20px;">
+    <p>Se o Minecraft não abrir automaticamente, adicione manualmente:</p>
+    <p><strong>Nome:</strong> Speedfire1237</p>
+    <p><strong>IP:</strong> Speedfire1237-JVnv.aternos.me</p>
+    <p><strong>Porta:</strong> 63287</p>
+  </div>
+
+  <script>
+    document.getElementById("openMinecraft").addEventListener("click", () => {
+      window.location.href = "minecraft://?addExternalServer=Speedfire1237|Speedfire1237-JVnv.aternos.me:63287";
+      setTimeout(() => {
+        alert("Se o Minecraft não abrir, adicione o servidor manualmente conforme as instruções abaixo.");
+      }, 3000);
+    });
+
+    document.getElementById("openCraftsman").addEventListener("click", () => {
+      window.location.href = "https://play.google.com/store/apps/details?id=com.craftsman.go";
+    });
+  </script>
+</body>
+</html>
