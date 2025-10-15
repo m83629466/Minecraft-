@@ -4,10 +4,12 @@ const fetch = require("node-fetch");
 const API_KEY = "ptlc_cL0PtluhuFTYEnZP909et8EVOXnOkkvubQiP3ezjRD3";
 const SERVER_ID = "c255005a";
 const PANEL_URL = "https://panel.magmanode.com";
+const MC_IP = "Speedfire1237-JVnv.aternos.me";
+const MC_PORT = 63287;
 
 module.exports = async (req, res) => {
   if (req.method === "POST") {
-    // Ligar servidor via API
+    // Ligar servidor via Pterodactyl API
     try {
       const response = await fetch(`${PANEL_URL}/api/client/servers/${SERVER_ID}/power`, {
         method: "POST",
@@ -30,7 +32,7 @@ module.exports = async (req, res) => {
     }
 
   } else if (req.method === "GET") {
-    // Página HTML com botão
+    // Retorna HTML
     res.setHeader("Content-Type", "text/html");
     res.send(`
       <!DOCTYPE html>
@@ -83,28 +85,43 @@ module.exports = async (req, res) => {
         <button id="openCraftsman">🧱 Abrir na Play Store (Craftsman)</button>
 
         <div class="info">
-          <p><strong>IP:</strong> Speedfire1237-JVnv.aternos.me</p>
-          <p><strong>Porta:</strong> 63287</p>
+          <p><strong>IP:</strong> ${MC_IP}</p>
+          <p><strong>Porta:</strong> ${MC_PORT}</p>
+          <p><strong>Status:</strong> <span id="status">Carregando...</span></p>
         </div>
 
         <script>
+          async function checkStatus() {
+            try {
+              const res = await fetch("https://api.mcsrvstat.us/2/${MC_IP}");
+              const data = await res.json();
+              document.getElementById("status").innerText = data.online ? "Online ✅" : "Offline ❌";
+            } catch(e) {
+              document.getElementById("status").innerText = "Erro ao verificar status";
+            }
+          }
+
           document.getElementById("startServer").addEventListener("click", async () => {
             try {
               const res = await fetch("/api/server", { method: "POST" });
               const data = await res.json();
               alert(data.message);
+              setTimeout(checkStatus, 5000); // checa status 5s depois
             } catch(err) {
               alert("Erro ao conectar com o servidor.");
             }
           });
 
           document.getElementById("openMinecraft").addEventListener("click", () => {
-            window.location.href = "minecraft://?addExternalServer=Speedfire1237|Speedfire1237-JVnv.aternos.me:63287";
+            window.location.href = "minecraft://?addExternalServer=${MC_IP}|${MC_IP}:${MC_PORT}";
           });
 
           document.getElementById("openCraftsman").addEventListener("click", () => {
             window.location.href = "https://play.google.com/store/apps/details?id=com.craftsman.go";
           });
+
+          checkStatus();
+          setInterval(checkStatus, 15000); // checa status a cada 15s
         </script>
       </body>
       </html>
