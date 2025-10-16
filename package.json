@@ -2,6 +2,7 @@
   "name": "minecraft-server",
   "version": "1.0.0",
   "dependencies": {
+    "express": "^5.1.0",
     "node-fetch": "^2.6.7"
   }
 }
