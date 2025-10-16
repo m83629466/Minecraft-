@@ -16,7 +16,7 @@ const html = `
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Speedfire1237 Server</title>
+  <title>Server</title>
   <link rel="icon" href="https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c7/Grass_Block.png/revision/latest?cb=20230226144250" type="image/png">
   <style>
     body { font-family: Arial; background: linear-gradient(135deg,#2c3e50,#4ca1af); color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center;}
@@ -26,11 +26,11 @@ const html = `
   </style>
 </head>
 <body>
-  <h1>🎮 Speedfire1237 Server</h1>
+  <h1>🎮Server</h1>
   <p>Gerencie e entre no servidor:</p>
 
   <button id="startServer">🚀 Ligar Servidor</button>
-  <button id="openMinecraft">🎮 Abrir no Minecraft</button>
+  <button id="openMinecraft">🎮 adicionar servidor</button>
   <button id="openCraftsman">🧱 Abrir minecraft</button>
 
   <div class="info">
