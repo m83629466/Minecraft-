@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Speedfire1237 Server</title>
+  <title>Server</title>
+  <link rel="icon" href="https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c7/Grass_Block.png/revision/latest?cb=20230226144250" type="image/png">
   <style>
     body { font-family: Arial; background: linear-gradient(135deg,#2c3e50,#4ca1af); color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center;}
     button { background:#27ae60;color:white;border:none;padding:15px 25px;font-size:18px;border-radius:10px;cursor:pointer;margin:10px;transition:0.3s;}
@@ -12,13 +13,47 @@
   </style>
 </head>
 <body>
-  <h1>🎮 Speedfire1237 Server</h1>
+  <h1>🎮Server</h1>
   <p>Gerencie e entre no servidor:</p>
 
   <button id="startServer">🚀 Ligar Servidor</button>
-  <button id="openMinecraft">🎮 Abrir no Minecraft</button>
-  <button id="openCraftsman">🧱 Abrir Craftsman</button>
+  <button id="openMinecraft">🎮 Adicionar servidor</button>
+  <button id="openCraftsman">🧱 Abrir Minecraft</button>
 
   <div class="info">
-    <p><strong>IP:</strong> Speedfire1237-JVnv.aternos.me</p>
-    <p><strong>P
+    <p><strong>IP:</strong> emerald.magmanode.com</p>
+    <p><strong>Porta:</strong> 27760</p>
+    <p><strong>Status:</strong> <span id="status">Carregando...</span></p>
+  </div>
+
+  <script>
+    async function checkStatus() {
+      try {
+        const res = await fetch("https://api.mcsrvstat.us/2/emerald.magmanode.com");
+        const data = await res.json();
+        document.getElementById("status").innerText = data.online ? "Online ✅" : "Offline ❌";
+      } catch { document.getElementById("status").innerText = "Erro ao verificar status"; }
+    }
+
+    document.getElementById("startServer").addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/start", { method: "POST" });
+        const data = await res.json();
+        alert(data.message);
+        setTimeout(checkStatus,5000);
+      } catch { alert("Erro ao conectar com o servidor."); }
+    });
+
+    document.getElementById("openMinecraft").addEventListener("click", () => {
+      window.location.href = "minecraft://?addExternalServer=emerald.magmanode.com|emerald.magmanode.com:27760";
+    });
+
+    document.getElementById("openCraftsman").addEventListener("click", () => {
+      window.location.href = "https://play.google.com/store/apps/details?id=com.mmircil.cnb2&hl=en-US&pli=1";
+    });
+
+    checkStatus();
+    setInterval(checkStatus,15000);
+  </script>
+</body>
+</html>
