@@ -3,31 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Server</title>
+<title>Servidor Minecraft</title>
 <link rel="icon" href="https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c7/Grass_Block.png" type="image/png">
 <style>
-body { font-family: Arial; background: linear-gradient(135deg,#2c3e50,#4ca1af); color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center;}
-button { background:#27ae60;color:white;border:none;padding:15px 25px;font-size:18px;border-radius:10px;cursor:pointer;margin:10px;transition:0.3s;}
-button:hover{background:#2ecc71;}
-.info{background:rgba(255,255,255,0.1);padding:10px 15px;border-radius:8px;font-size:15px;margin-top:20px;}
+  body { font-family: Arial; background: linear-gradient(135deg,#2c3e50,#4ca1af); color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center;}
+  button { background:#27ae60;color:white;border:none;padding:15px 25px;font-size:18px;border-radius:10px;cursor:pointer;margin:10px;transition:0.3s;}
+  button:hover{background:#2ecc71;}
+  .info{background:rgba(255,255,255,0.1);padding:10px 15px;border-radius:8px;font-size:15px;margin-top:20px;}
 </style>
 </head>
 <body>
-<h1>🎮Server</h1>
+
+<h1>🎮 Servidor Minecraft</h1>
 <p>Gerencie e entre no servidor:</p>
 
 <button id="startServer">🚀 Ligar Servidor</button>
+<button id="openMinecraft">🎮 Adicionar no Minecraft</button>
 
 <div class="info">
   <p><strong>Status:</strong> <span id="status">Carregando...</span></p>
 </div>
 
 <script>
-const API_URL = "https://minecraft-gwwh.onrender.com/start-server"; // URL do Node remoto
+const NODE_API = "https://minecraft-gwwh.onrender.com//start-server"; // substitua pela URL do Node remoto
+const MC_IP = "emerald.magmanode.com";
+const MC_PORT = 27760;
 
+// Verifica status do servidor
 async function checkStatus() {
   try {
-    const res = await fetch("https://api.mcsrvstat.us/2/emerald.magmanode.com");
+    const res = await fetch(`https://api.mcsrvstat.us/2/${MC_IP}`);
     const data = await res.json();
     document.getElementById("status").innerText = data.online ? "Online ✅" : "Offline ❌";
   } catch {
@@ -35,9 +40,10 @@ async function checkStatus() {
   }
 }
 
+// Botão para ligar servidor
 document.getElementById("startServer").addEventListener("click", async () => {
   try {
-    const res = await fetch(API_URL, { method: "POST" });
+    const res = await fetch(NODE_API, { method: "POST" });
     const data = await res.json();
     alert(data.message);
     setTimeout(checkStatus, 5000);
@@ -46,8 +52,15 @@ document.getElementById("startServer").addEventListener("click", async () => {
   }
 });
 
+// Botão para abrir Minecraft
+document.getElementById("openMinecraft").addEventListener("click", () => {
+  window.location.href = `minecraft://?addExternalServer=${MC_IP}|${MC_IP}:${MC_PORT}`;
+});
+
+// Atualiza status automaticamente
 checkStatus();
 setInterval(checkStatus, 15000);
 </script>
+
 </body>
 </html>
