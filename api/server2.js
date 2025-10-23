@@ -7,7 +7,7 @@ app.use(cors()); // permite que o HTML remoto acesse a API
 app.use(express.json());
 
 const API_KEY = "ptlc_EHYPGUJawkUfF3p9hOtl1L48yYWE8aNtVmsz87kpdE2";
-const SERVER_ID = "08edd509";
+const SERVER_ID = "143f80a9";
 const PANEL_URL = "https://panel.magmanode.com";
 
 app.post("/start-server", async (req, res) => {
