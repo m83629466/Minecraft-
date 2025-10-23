@@ -54,9 +54,10 @@
 </div>
 
 <script>
-const NODE_API = "https://minecraft-gwwh.onrender.com/start-server"; // Node.js remoto Render
-const MC_IP = "emerald.magmanode.com";
-const MC_PORT = 27760;
+const NODE_API = "https://minecraft-1-u4rl.onrender.com/start-server"; // Node.js remoto Render
+const MC_IP = "gold.magmanode.com";
+const MC_NAME = "server";
+const MC_PORT = 26241;
 
 // Verifica status do servidor
 async function checkStatus() {
@@ -83,7 +84,7 @@ document.getElementById("startServer").addEventListener("click", async () => {
 
 // Botão para abrir Minecraft
 document.getElementById("openMinecraft").addEventListener("click", () => {
-  window.location.href = `minecraft://?addExternalServer=${MC_IP}|${MC_IP}:${MC_PORT}`;
+  window.location.href = `minecraft://?addExternalServer=${MC_NAME}|${MC_IP}:${MC_PORT}`;
 });
 
 // Botão para abrir Craftsman na Play Store
